@@ -10,3 +10,5 @@ Rasa Novum's Timber Frames Mod allows players to create medieval and fantasy tim
 
 ![This is an image](https://i.imgur.com/0wu56Zm.png)
 
+**Permissions**
+- Feel free to include this mod in your modpack as long as you credit us and download it from our official sources.
