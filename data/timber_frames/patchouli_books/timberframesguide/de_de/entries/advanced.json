@@ -1,0 +1,29 @@
+{
+	"name": "Erweiterte Optionen",
+	"icon": "minecraft:writable_book",
+	"sortnum": 2,
+	"priority": true,
+	"category": "timber_frames:default",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "In diesem Kapitel lernen Sie die optionalen Techniken kennen. Mit diesen Techniken können Sie fortschrittliche $(thing)Fachwerkmuster$() erstellen.$(br2)Diese können in der $(thing)Spachtelmesser$()-Konfiguration aktiviert werden. Drücke die $(thing)H-taste$() mit dem Spachtelmesser in deiner Hand."
+		},
+		{
+			"type": "timber_frames:medium_image",
+			"heading": "Variantenplatzierung",
+			"image": "timber_frames:textures/patchouli_guide/adv1.png",
+			"text": "In diesem Modus ändert ein $(thing)Rechtsklick$() sowohl die Variante als auch das Muster des Blocks."
+		},
+		{
+			"type": "timber_frames:medium_image",
+			"heading": "Isolationsblöcke",
+			"image": "timber_frames:textures/patchouli_guide/adv2.png",
+			"text": "Wenn Sie dies aktivieren, wird eine dritte Variante hinzugefügt. Die Variante verbindet sich nur mit sich selbst."
+		},
+		{
+			"type": "patchouli:empty",
+			"draw_filler": false
+		}
+	]
+}

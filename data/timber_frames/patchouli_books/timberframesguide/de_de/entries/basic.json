@@ -1,0 +1,30 @@
+{
+	"name": "Die Grundlagen",
+	"icon": "timber_frames:broad_knife",
+	"sortnum": 0,
+	"priority": true,
+	"category": "timber_frames:default",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "In diesem Handbuch lernen Sie die Grundlagen des Baus und der Modifizierung von Gebäuden mit $(thing)Fachwerk$()."
+		},
+		{
+			"type": "patchouli:spotlight",
+			"item": "timber_frames:broad_knife",
+			"text": "Das $(thing)Spachtelmesser$() ist das Werkzeug, mit dem Sie Muster und Verbindungen von $(thing)Fachwerk$() ändern können."
+		},
+		{
+			"type": "timber_frames:short_image",
+			"heading": "Rechtsklick",
+			"image": "timber_frames:textures/patchouli_guide/r_click.png",
+			"text": "Machen Sie einen $(thing)schleich rechtsklick$() mit dem Spachtelmesser in Ihrer Hand, um die Auswahl der Blockplatzierung zu ändern. $(br2)$(thing)Rechtsklicken$() auf Fachwerkblöcke um Ihre Auswahl zu übernehmen."
+		},
+		{
+			"type": "timber_frames:short_image",
+			"heading": "Linksklick",
+			"image": "timber_frames:textures/patchouli_guide/l_click.png",
+			"text": "Machen Sie einen $(thing)schleich linksklick$() mit dem Spachtelmesser in Ihrer Hand, um die Blockvariantenauswahl zu ändern. $(br2)$(thing)Rechtsklicken$() auf Fachwerkblöcke um Ihre Auswahl zu übernehmen."
+		}
+	]
+}

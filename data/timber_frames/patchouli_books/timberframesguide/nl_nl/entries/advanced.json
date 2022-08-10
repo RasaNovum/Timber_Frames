@@ -1,0 +1,29 @@
+{
+	"name": "Geavanceerd Gebruik",
+	"icon": "minecraft:writable_book",
+	"sortnum": 2,
+	"priority": true,
+	"category": "timber_frames:default",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "In dit hoofdstuk leert u over de optionele technieken die u kunt gebruiken om geavanceerde $(thing)vakwerk$()-patronen te bouwen.$(br2)Deze technieken kunnen worden ingeschakeld in de $(thing)plamuurmes$()-configuratie door op de $(thing)H key$() terwijl het plamuurmes in je hand is."
+		},
+		{
+			"type": "timber_frames:medium_image",
+			"heading": "Variantplaatsing",
+			"image": "timber_frames:textures/patchouli_guide/adv1.png",
+			"text": "In deze modus als je met de $(thing)rechtermuisknop$() op een blok klikt, verandert zowel de variant als het patroon van het blok"
+		},
+		{
+			"type": "timber_frames:medium_image",
+			"heading": "Isolatie Blokken",
+			"image": "timber_frames:textures/patchouli_guide/adv2.png",
+			"text": "Door dit in te schakelen, wordt een derde variant toegevoegd die alleen verbinding maakt met zichzelf."
+		},
+		{
+			"type": "patchouli:empty",
+			"draw_filler": false
+		}
+	]
+}

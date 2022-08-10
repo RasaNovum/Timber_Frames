@@ -1,0 +1,31 @@
+{
+	"name": "Verbundene Texturen",
+	"icon": "timber_frames:dark_oak_timber_frame_cross",
+	"sortnum": 1,
+	"priority": true,
+	"category": "timber_frames:default",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "In diesem Kapitel erfahren Sie, wie das $(thing)Connected Texture$()-System mit $(thing)Fachwerk$() funktioniert."
+		},
+		{
+			"type": "timber_frames:medium_image",
+			"heading": "Variantenänderungen",
+			"image": "timber_frames:textures/patchouli_guide/ctm1.png",
+			"text": "Verwenden Sie Varianten, um nahtlose Verbindungen zu erstellen."
+		},
+		{
+			"type": "timber_frames:short_image",
+			"heading": "Gemeinsame Verbindungen",
+			"image": "timber_frames:textures/patchouli_guide/ctm2.png",
+			"text": "Blöcke werden immer miteinander verbunden. Aber sie verbinden sich nicht, wenn sie gegensätzliche Varianten $(bold)und$() das gleiche Muster haben."
+		},
+		{
+			"type": "timber_frames:short_image",
+			"heading": "Eckverbindungen",
+			"image": "timber_frames:textures/patchouli_guide/ctm3.png",
+			"text": "Blöcke bilden Ecken, wenn sie mit den Blöcken neben ihnen verbunden sind und nicht mit den Blöcken diagonal zu ihnen verbunden sind."
+		}
+	]
+}
