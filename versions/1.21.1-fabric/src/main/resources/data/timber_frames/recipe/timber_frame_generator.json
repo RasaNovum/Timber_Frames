@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SCS",
+    "CLC",
+    "SCS"
+  ],
+  "key": {
+    "S": [
+      { "tag": "minecraft:sand" },
+      { "tag": "c:sands" }
+    ],
+    "C": { "item": "minecraft:clay" },
+    "L": { "tag": "minecraft:logs" }
+  },
+  "result": {
+    "count": 8,
+    "id": "timber_frames:timber_frame"
+  }
+}

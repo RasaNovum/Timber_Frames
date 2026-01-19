@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:story/smelt_iron",
+  "display": {
+    "icon": {
+      "id": "timber_frames:broad_knife"
+    },
+    "title": {
+      "translate": "advancements.shiver_me_timbers.title"
+    },
+    "description": {
+      "translate": "advancements.shiver_me_timbers.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "crafted_broad_knife": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "timber_frames:broad_knife"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crafted_broad_knife"
+    ]
+  ]
+}

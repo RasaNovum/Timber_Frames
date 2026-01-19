@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "timber_frames:block/plaster_white",
+    "timber": "timber_frames:block/oak_timber"
+  }
+}

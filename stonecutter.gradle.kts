@@ -1,0 +1,44 @@
+plugins {
+    id("dev.kikugie.stonecutter")
+    id("co.uzzu.dotenv.gradle") version "4.0.0"
+    id("fabric-loom") version "1.13-SNAPSHOT" apply false
+    id("net.minecraftforge.gradle") version ("6.0.46") apply false
+    id("org.parchmentmc.librarian.forgegradle") version "1.+" apply false
+    id("net.neoforged.moddev") version "2.0.95" apply false
+    id ("dev.kikugie.postprocess.jsonlang") version "2.1-beta.4" apply false
+    id("me.modmuss50.mod-publish-plugin") version "0.8.+" apply false
+    id("org.spongepowered.mixin") version "0.7.+" apply false
+}
+
+stonecutter.active("1.21.1-fabric")
+
+stonecutter {
+    parameters {
+        constants.match(node.metadata.project.substringAfterLast('-'), "fabric", "neoforge", "forge")
+    }
+
+    tasks {
+        order("publishModrinth")
+        order("publishCurseforge")
+    }
+}
+
+for (version in stonecutter.versions.map { it.version }.distinct()) {
+    tasks.register("publish$version") {
+        group = "publishing"
+        dependsOn(stonecutter.tasks.named("publishMods") { metadata.version == version })
+    }
+}
+
+for (project in stonecutter.versions) {
+    val loader = project.project.substringAfterLast('-').replaceFirstChar { it.titlecase() }
+    val version = project.version
+    val taskName = "publish$version$loader"
+    
+    tasks.register(taskName) {
+        group = "publishing"
+        dependsOn(stonecutter.tasks.named("publishMods") { 
+            metadata.project == project.project 
+        })
+    }
+}

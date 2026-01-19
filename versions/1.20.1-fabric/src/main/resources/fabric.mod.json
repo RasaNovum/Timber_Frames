@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "${modId}",
+	"version": "${version}",
+	"name": "${modName}",
+	"description": "${modDescription}",
+	"authors": [
+		"${authors}"
+	],
+	"contributors": [
+		"${contributors}"
+	],
+	"contact": {
+		"homepage": "${homepage}",
+		"issues": "${issues}",
+		"sources": "${sources}"
+	},
+	"license": "${license}",
+	"icon": "assets/${modId}/icon.png",
+	"accessWidener": "${modId}.accesswidener",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.rasanovum.timberframes.TimberFramesEntrypoint"
+		]
+	},
+	"depends": {
+		"minecraft": ">=${mc}",
+		"fabricloader": ">=${fl}",
+		"fabric-api": ">=${fapi}",
+		"rosetta_library": ">=${rosetta}",
+		"mixson": ">=${mixson}",
+		"mixson_rosetta": ">=${mixson}",
+		"indium": "1.0.36+mc1.20.1"
+	},
+	"mixins": [
+		"${modId}.mixins.json"
+	]
+}

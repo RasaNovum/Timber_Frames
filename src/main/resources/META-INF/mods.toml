@@ -1,0 +1,49 @@
+modLoader = "javafml"
+loaderVersion = "[46,)"
+license = "${license}"
+issueTrackerURL = "${issues}"
+
+[[mods]]
+modId = "${modId}"
+version = "${version}"
+displayName = "${modName}"
+description = '''${modDescription}'''
+authors = "${authors}"
+credits = "${contributors}"
+displayURL = "${homepage}"
+logoFile = "logo.png"
+
+[[dependencies.${modId}]]
+modId = "forge"
+mandatory = true
+versionRange = "[${forge},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${mc}]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "rosetta_library"
+mandatory = true
+versionRange = "[${rosetta},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "mixson"
+mandatory = true
+versionRange = "[${mixson},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "mixson_rosetta"
+mandatory = true
+versionRange = "[${mixson},)"
+ordering = "NONE"
+side = "BOTH"

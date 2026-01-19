@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.rasanovum.timberframes.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "client.TimberFrameSpriteLoaderMixin",
+    "client.MinecraftSearchTreesAccessor"
+  ],
+  "mixins": [
+    "BroadKnifeEnchantmentMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "timber_frames.refmap.json"
+}

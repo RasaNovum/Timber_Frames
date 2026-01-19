@@ -1,0 +1,52 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "${license}"
+issueTrackerURL = "${issues}"
+
+[[mods]]
+modId = "${modId}"
+version = "${version}"
+displayName = "${modName}"
+description = '''${modDescription}'''
+authors = "${authors}"
+credits = "${contributors}"
+displayURL = "${homepage}"
+logoFile = "logo.png"
+
+[[mixins]]
+config = "timber_frames.mixins.json"
+
+[[dependencies.${ modId }]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neoforge},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ modId }]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${mc},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "rosetta_library"
+type = "required"
+versionRange = "[${rosetta},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "mixson"
+type = "required"
+versionRange = "[${mixson},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${modId}]]
+modId = "mixson_rosetta"
+type = "required"
+versionRange = "[${mixson},)"
+ordering = "NONE"
+side = "BOTH"

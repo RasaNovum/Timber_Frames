@@ -1,0 +1,22 @@
+rootREADME: true
+summary: Timber Frames adds various timber frame blocks and a tool to customize the shape of the frames using a connective texture system.
+platforms:
+  primary: modrinth
+  modrinth:
+    id: timber-frames
+  curseforge:
+    id: timber-frames
+gameVersions:
+  - "1.20.1"
+  - "1.21.1"
+loaders:
+  - fabric
+  - forge
+  - neoforge
+type: minecraft
+category: mod
+modId: timber_frames
+licenses:
+  project:
+    id: RSL
+    url: https://github.com/RasaNovum/Via_Romana/blob/main/LICENSE.md

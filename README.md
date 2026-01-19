@@ -10,6 +10,3 @@
 Rasa Novum's Timber Frames Mod allows players to create medieval and fantasy timber frame walls in an aesthetic and dynamic manner. With the broad knife tool, players can change the basic timber frame block into several different variants in order to achieve the look they want for an area. These variants utilize a connecting texture system to allow players to attain various results with any size of wall.
 
 ![This is an image](https://i.imgur.com/0wu56Zm.png)
-
-**Permissions**
-- Feel free to include this mod in your modpack as long as you credit us and download it from our official sources.

@@ -1,0 +1,157 @@
+import org.gradle.language.jvm.tasks.ProcessResources
+
+plugins {
+    id("net.neoforged.moddev")
+    id("me.modmuss50.mod-publish-plugin")
+}
+
+version = "${property("mod.version")}+${property("deps.minecraft")}-neoforge"
+base.archivesName = property("mod.id") as String
+
+neoForge {
+    version = property("deps.neoforge_version") as String
+
+    if (hasProperty("deps.parchment")) {
+        parchment {
+            minecraftVersion = property("deps.minecraft") as String
+            mappingsVersion = property("deps.parchment") as String
+        }
+    }
+
+    runs {
+        register("client") {
+            client()
+        }
+        register("server") {
+            server()
+        }
+        register("data") {
+            data()
+        }
+    }
+
+    mods {
+        register(property("mod.id") as String) {
+            sourceSet(sourceSets.main.get())
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven("https://raw.githubusercontent.com/Rasa-Novum/Mixson/maven/")
+    maven("https://raw.githubusercontent.com/Rasa-Novum/Rosetta_Library/maven/")
+    maven("https://raw.githubusercontent.com/xameryn/Mixson/maven/")
+    maven("https://maven.su5ed.dev/releases")
+    maven("https://repo.sleeping.town/")
+    maven("https://maven.terraformersmc.com/")
+    maven("https://maven.shedaniel.me/")
+    maven("https://api.modrinth.com/maven")
+    maven("https://maven.parchmentmc.org")
+    maven("https://modmaven.k-4u.nl/")
+    maven("https://jm.gserv.me/repository/maven-public/")
+    maven("https://cursemaven.com")
+    maven("https://maven.sinytra.org/releases")
+    mavenCentral()
+}
+
+dependencies {
+    val mixsonDependency = "com.rasanovum.mixson:mixson-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
+    val mixsonRosettaDependency = "com.rasanovum.mixson:mixson-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
+    val rosettaDependency = "com.rasanovum.rosetta:rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.rosetta")}"
+
+    implementation(rosettaDependency)
+    compileOnly(mixsonDependency)
+    runtimeOnly(mixsonDependency)
+    implementation(mixsonRosettaDependency)
+    jarJar(mixsonDependency) {
+        version { strictly("[${property("deps.mixson")}]" ) }
+    }
+    jarJar(mixsonRosettaDependency) {
+        version { strictly("[${property("deps.mixson")}]" ) }
+    }
+    jarJar(rosettaDependency) {
+        version { strictly("[${property("deps.rosetta")}]" ) }
+    }
+    implementation("com.google.code.gson:gson:2.10.1")
+}
+
+tasks.named<ProcessResources>("processResources") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    val props = mapOf(
+        "version" to project.version,
+        "mc" to project.property("deps.minecraft"),
+        "modName" to project.property("mod.name"),
+        "modId" to project.property("mod.id"),
+        "modDescription" to project.property("mod.description"),
+        "authors" to project.property("mod.authors"),
+        "contributors" to project.property("mod.contributors"),
+        "license" to project.property("mod.license"),
+        "homepage" to project.property("mod.homepage"),
+        "issues" to project.property("mod.issues"),
+        "sources" to project.property("mod.sources"),
+        "neoforge" to project.property("deps.neoforge_version"),
+        "rosetta" to project.property("deps.rosetta"),
+        "mixson" to project.property("deps.mixson"),
+    )
+
+    inputs.properties(props)
+
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand(props)
+    }
+
+    exclude("**/fabric.mod.json", "**/*.accesswidener", "**/mods.toml")
+}
+
+stonecutter {
+    val loaderClientField = "@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT)"
+    val stringReplacements = mapOf(
+        "@net.minecraftforge.api.distmarker.OnlyIn(net.minecraftforge.api.distmarker.Dist.CLIENT)" to loaderClientField,
+        "@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)" to loaderClientField
+    )
+
+    stringReplacements.forEach { (from, to) ->
+        replacements.string {
+            direction = true
+            replace(from, to)
+        }
+    }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
+    val javaVersion = if (stonecutter.eval(stonecutter.current.version, ">=1.20.5")) 21 else 17
+    options.release.set(javaVersion)
+}
+
+java {
+    withSourcesJar()
+    val javaVersion = if (stonecutter.eval(stonecutter.current.version, ">=1.20.5")) 21 else 17
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
+    targetCompatibility = JavaVersion.toVersion(javaVersion)
+}
+
+publishMods {
+    file = tasks.jar.get().archiveFile
+    changelog = rootProject.file("CHANGELOG.md").takeIf { it.exists() }?.readText() ?: "No changelog provided"
+    type = STABLE
+    modLoaders.add("neoforge")
+    
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        projectId = property("publish.modrinth") as String
+        minecraftVersions.add(property("deps.minecraft") as String)
+
+    }
+    
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        projectId = property("publish.curseforge") as String
+        minecraftVersions.add(property("deps.minecraft") as String)
+
+        clientRequired = true
+        serverRequired = true
+    }
+}
