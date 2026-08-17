@@ -13,12 +13,14 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.rasanovum.timberframes.block.entity.TimberFrameBlockEntity;
 import net.rasanovum.timberframes.items.TimberFrameItem;
@@ -114,14 +116,28 @@ public final class TimberFrameBakedModel implements BakedModel, FabricBakedModel
 
     private static TextureAtlasSprite getSprite(ResourceLocation timberId) {
         TextureAtlasSprite sprite = BLOCK_SPRITES.get(timberId);
+        if (isMissing(sprite)) {
+            sprite = null;
+        }
         if (sprite == null) {
+            sprite = getBakedBlockSprite(timberId);
+        }
+        if (isMissing(sprite)) {
             sprite = Minecraft.getInstance().getTextureAtlas(net.minecraft.world.inventory.InventoryMenu.BLOCK_ATLAS)
                     .apply(VersionUtils.getLocation(timberId.getNamespace(), "block/" + timberId.getPath()));
         }
-        if (sprite == null && MISSING_SPRITES_LOGGED.add(timberId)) {
+        if (isMissing(sprite) && MISSING_SPRITES_LOGGED.add(timberId)) {
             TimberFrames.LOGGER.warn("No baked timber sprite registered for {}", timberId);
         }
         return sprite;
+    }
+
+    private static TextureAtlasSprite getBakedBlockSprite(ResourceLocation timberId) {
+        if (!BuiltInRegistries.BLOCK.containsKey(timberId)) return null;
+        Block block = BuiltInRegistries.BLOCK.get(timberId);
+        return Minecraft.getInstance().getBlockRenderer()
+                .getBlockModel(block.defaultBlockState())
+                .getParticleIcon();
     }
 
     @Override public List<BakedQuad> getQuads(BlockState state, Direction face, RandomSource random) {

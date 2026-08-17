@@ -39,9 +39,9 @@ Place group files in the recipe resource folder for the Minecraft version:
 }
 ```
 
-`target.any` expands block tags into possible timber targets. `inputs.any` expands item tags into possible recipe inputs. A target and an input belong to the same timber family when their resource paths match the same captured wildcard value.
+`target.any` expands block tags into possible timber targets. `inputs.any` expands item tags into possible recipe inputs. A target and an input belong to the same timber family when their namespace and resource paths match the same captured wildcard value. Log, wood, stem, hyphae, block, and bundle variants in one namespace/material family share one recipe; matching families from different namespaces remain separate.
 
-Patterns are ordered and use one `*` wildcard. The wildcard becomes the family key:
+Patterns are ordered and use one `*` wildcard. The namespace plus wildcard becomes the family key:
 
 ```text
 stripped_oak_log -> oak
@@ -50,9 +50,9 @@ oak_wood         -> oak
 dark_oak_log     -> dark_oak
 ```
 
-Patterns should be listed from most specific to least specific. Target patterns also establish target priority when multiple blocks resolve to the same family. Each selected target produces one recipe, with every matching input item accepted by that recipe.
+Patterns should be listed from most specific to least specific. The first matching target pattern is used for a family, with every matching input item accepted by that recipe.
 
-Patterns match the resource path, not the namespace. Tags that do not exist on a particular loader are ignored, which allows a group to list compatible Forge, Common, and vanilla tags together.
+Patterns match the resource path while retaining the namespace in the family key. Tags that do not exist on a particular loader are ignored, which allows a group to list compatible Forge, Common, and vanilla tags together.
 
 Variant names are calculated from the localized hover names of the accepted input items. The longest common word sequence is used, so `Oak Log` plus `Oak Wood` becomes `Oak`, while `Stripped Oak Log` plus `Stripped Oak Wood` becomes `Stripped Oak`. If no useful common name is found, the target block name is used.
 

@@ -39,13 +39,10 @@ public final class RecipeGenerator {
     private static final Index GENERATOR_RESOURCE = new Index("timber_frames:recipe/timber_frame_generator");
     //?}
 
-    //? if <1.21 {
-    /*private static final String BLOCK_TAG_PREFIX = "tags/blocks/";
-    private static final String ITEM_TAG_PREFIX = "tags/items/";
-    *///?} else {
     private static final String BLOCK_TAG_PREFIX = "tags/block/";
     private static final String ITEM_TAG_PREFIX = "tags/item/";
-    //?}
+    private static final String PLURAL_BLOCK_TAG_PREFIX = "tags/blocks/";
+    private static final String PLURAL_ITEM_TAG_PREFIX = "tags/items/";
     //? if <1.21 {
     /*private static final String GROUP_RESOURCE_PREFIX = "recipes/timber_frame_groups/";
     *///?} else {
@@ -115,8 +112,15 @@ public final class RecipeGenerator {
     }
 
     private static boolean isTagResource(Index index) {
-        String path = index.id().getPath();
-        return path.startsWith(BLOCK_TAG_PREFIX) || path.startsWith(ITEM_TAG_PREFIX);
+        return tagPrefix(index.id().getPath()) != null;
+    }
+
+    private static String tagPrefix(String path) {
+        if (path.startsWith(BLOCK_TAG_PREFIX)) return BLOCK_TAG_PREFIX;
+        if (path.startsWith(ITEM_TAG_PREFIX)) return ITEM_TAG_PREFIX;
+        if (path.startsWith(PLURAL_BLOCK_TAG_PREFIX)) return PLURAL_BLOCK_TAG_PREFIX;
+        if (path.startsWith(PLURAL_ITEM_TAG_PREFIX)) return PLURAL_ITEM_TAG_PREFIX;
+        return null;
     }
 
     private static boolean isGroupResource(Index index) {
@@ -141,8 +145,10 @@ public final class RecipeGenerator {
         resetForNextReloadIfNeeded();
 
         String path = context.getIndex().id().getPath();
-        boolean blockTag = path.startsWith(BLOCK_TAG_PREFIX);
-        String prefix = blockTag ? BLOCK_TAG_PREFIX : ITEM_TAG_PREFIX;
+        String prefix = tagPrefix(path);
+        if (prefix == null) return;
+        boolean blockTag = prefix.equals(BLOCK_TAG_PREFIX)
+                || prefix.equals(PLURAL_BLOCK_TAG_PREFIX);
         ResourceLocation tagId = VersionUtils.getLocation(
                 context.getIndex().id().getNamespace(),
                 path.substring(prefix.length())
@@ -321,11 +327,14 @@ public final class RecipeGenerator {
         );
 
         Map<String, TargetMatch> targetsByFamily = new LinkedHashMap<>();
+        List<ResourceLocation> ignoredTargets = new ArrayList<>();
         for (ResourceLocation targetId : targetMembers) {
             GlobMatch match = match(targetId, group.targetPatterns());
             if (match != null) {
                 TargetMatch candidate = new TargetMatch(targetId, match.patternPriority());
                 targetsByFamily.merge(match.familyKey(), candidate, RecipeGenerator::preferTarget);
+            } else {
+                ignoredTargets.add(targetId);
             }
         }
 
@@ -341,7 +350,12 @@ public final class RecipeGenerator {
         int added = 0;
         for (String familyKey : targetsByFamily.keySet().stream().sorted().toList()) {
             List<ResourceLocation> inputs = inputsByFamily.get(familyKey);
-            if (inputs == null || inputs.isEmpty()) continue;
+            if (inputs == null || inputs.isEmpty()) {
+                TimberFrames.LOGGER.debug(
+                        "Timber group {} has no matching inputs for family {}.", groupId, familyKey
+                );
+                continue;
+            }
 
             inputs.sort(Comparator.comparing(ResourceLocation::toString));
             variants.add(new Variant(
@@ -351,6 +365,15 @@ public final class RecipeGenerator {
                     targetsByFamily.get(familyKey).targetId()
             ));
             added++;
+        }
+        TimberFrames.LOGGER.info(
+                "Timber group {} resolved {} target blocks and {} input items; generated {} variants and ignored {} targets outside its match patterns.",
+                groupId, targetMembers.size(), inputMembers.size(), added, ignoredTargets.size()
+        );
+        if (!ignoredTargets.isEmpty()) {
+            TimberFrames.LOGGER.debug(
+                    "Timber group {} ignored target blocks: {}", groupId, ignoredTargets
+            );
         }
         if (added == 0) {
             TimberFrames.LOGGER.warn("Timber group {} has no matching registered block items.", groupId);
@@ -539,7 +562,9 @@ public final class RecipeGenerator {
 
         private GlobMatch match(ResourceLocation id) {
             Matcher matcher = regex.matcher(id.getPath());
-            return matcher.matches() ? new GlobMatch(matcher.group(1), patternPriority) : null;
+            return matcher.matches()
+                    ? new GlobMatch(id.getNamespace() + ":" + matcher.group(1), patternPriority)
+                    : null;
         }
     }
 

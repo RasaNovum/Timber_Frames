@@ -49,9 +49,7 @@ public final class TimberFramesClientEntrypoint implements RosettaClientEntrypoi
             refreshPresentation();
         }));
         RecipeGenerator.setClientRefresh(() -> Minecraft.getInstance().execute(this::refreshPresentation));
-        TimberFrameAssets.setClientBackgroundRefresh(() -> Minecraft.getInstance().execute(
-                () -> Minecraft.getInstance().reloadResourcePacks()
-        ));
+        TimberFrameAssets.setClientBackgroundRefresh(() -> Minecraft.getInstance().execute(() -> Minecraft.getInstance().reloadResourcePacks()));
 
         //? if fabric {
         Material plasterMaterial = new Material(InventoryMenu.BLOCK_ATLAS, VersionUtils.getLocation(TimberFrames.MODID, "block/plaster_white"));

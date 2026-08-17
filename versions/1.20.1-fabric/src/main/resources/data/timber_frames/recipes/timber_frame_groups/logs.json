@@ -2,7 +2,8 @@
   "target": {
     "any": [
       { "block_tag": "forge:stripped_logs" },
-      { "block_tag": "c:stripped_logs" }
+      { "block_tag": "c:stripped_logs" },
+      { "block_tag": "timber_frames:stripped_logs" }
     ]
   },
   "inputs": {
@@ -21,10 +22,10 @@
   "match": {
     "target": [
       "stripped_*_log",
-      "stripped_*_wood",
       "stripped_*_stem",
       "stripped_*_hyphae",
-      "stripped_*_block"
+      "stripped_*_block",
+      "stripped_*_bundle"
     ],
     "inputs": [
       "stripped_*_log",
@@ -36,7 +37,8 @@
       "*_wood",
       "*_stem",
       "*_hyphae",
-      "*_block"
+      "*_block",
+      "*_bundle"
     ]
   },
   "emit": "one_recipe_per_timber"
