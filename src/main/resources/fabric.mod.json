@@ -29,8 +29,8 @@
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
 		"rosetta_library": ">=${rosetta}",
-		"mixson": ">=${mixson}",
-		"mixson_rosetta": ">=${mixson}"
+		"runeweaver": ">=${runeweaver}",
+		"runeweaver_rosetta": ">=${runeweaver}"
 	},
 	"mixins": [
 		"${modId}.mixins.json"

@@ -60,9 +60,8 @@ mixin {
 
 repositories {
     mavenLocal()
-    maven("https://raw.githubusercontent.com/Rasa-Novum/Mixson/maven/")
+    maven("https://raw.githubusercontent.com/Rasa-Novum/runeweaver/maven/")
     maven("https://raw.githubusercontent.com/Rasa-Novum/Rosetta_Library/maven/")
-    maven("https://raw.githubusercontent.com/xameryn/Mixson/maven/")
     maven("https://maven.su5ed.dev/releases")
     maven("https://repo.sleeping.town/")
     maven("https://maven.terraformersmc.com/")
@@ -78,19 +77,19 @@ repositories {
 
 
 dependencies {
-val mixsonDependency = "com.rasanovum.mixson:mixson-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
-val mixsonRosettaDependency = "com.rasanovum.mixson:mixson-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
+val runeweaverDependency = "com.rasanovum.runeweaver:runeweaver-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.runeweaver")}"
+val runeweaverRosettaDependency = "com.rasanovum.runeweaver:runeweaver-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.runeweaver")}"
     val rosettaDependency = "com.rasanovum.rosetta:rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.rosetta")}"
 
     minecraft("net.minecraftforge:forge:${property("deps.minecraft")}-${property("deps.forge_version")}")
 
     implementation(fg.deobf(rosettaDependency))
-    compileOnly(mixsonDependency)
-    runtimeOnly(mixsonDependency)
-    compileOnly(mixsonRosettaDependency)
-    runtimeOnly(mixsonRosettaDependency)
-    jarJar("com.rasanovum.mixson:mixson-${property("deps.minecraft")}-${property("deps.loader")}:[${property("deps.mixson")}]")
-    jarJar("com.rasanovum.mixson:mixson-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:[${property("deps.mixson")}]") {
+    compileOnly(runeweaverDependency)
+    runtimeOnly(runeweaverDependency)
+    compileOnly(runeweaverRosettaDependency)
+    runtimeOnly(runeweaverRosettaDependency)
+    jarJar("com.rasanovum.runeweaver:runeweaver-${property("deps.minecraft")}-${property("deps.loader")}:[${property("deps.runeweaver")}]")
+    jarJar("com.rasanovum.runeweaver:runeweaver-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:[${property("deps.runeweaver")}]") {
         exclude(group = "com.rasanovum.rosetta")
     }
     jarJar("com.rasanovum.rosetta:rosetta-${property("deps.minecraft")}-${property("deps.loader")}:[${property("deps.rosetta")}]")
@@ -119,7 +118,7 @@ tasks.named<ProcessResources>("processResources") {
         "sources" to project.property("mod.sources"),
         "forge" to project.property("deps.forge_version"),
         "rosetta" to project.property("deps.rosetta"),
-        "mixson" to project.property("deps.mixson"),
+        "runeweaver" to project.property("deps.runeweaver"),
     )
 
     inputs.properties(props)

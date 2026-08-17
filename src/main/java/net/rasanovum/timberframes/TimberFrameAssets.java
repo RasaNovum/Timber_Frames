@@ -1,13 +1,13 @@
 package net.rasanovum.timberframes;
 
 import net.minecraft.resources.ResourceLocation;
-import net.ramixin.mixson.rosetta.AssetChannel;
+import net.rasanovum.runeweaver.rosetta.AssetChannel;
 import net.rasanovum.timberframes.util.VersionUtils;
 
 import java.util.Arrays;
 import java.util.Map;
 
-/** Server-owned Timber Frames presentation assets shared with clients through Mixson Rosetta. */
+/** Server-owned Timber Frames presentation assets shared with clients through Runeweaver Rosetta. */
 public final class TimberFrameAssets {
     private static final int MAX_NAME_ASSET_BYTES = 64 * 1024;
     private static final int MAX_NAME_TOTAL_BYTES = 512 * 1024;

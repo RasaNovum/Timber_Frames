@@ -6,11 +6,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.ramixin.mixson.Mixson;
-import net.ramixin.mixson.enums.ErrorPolicy;
-import net.ramixin.mixson.enums.Lifetime;
-import net.ramixin.mixson.util.Index;
-import net.ramixin.mixson.util.functions.Event;
+import net.rasanovum.runeweaver.Runeweaver;
+import net.rasanovum.runeweaver.enums.ErrorPolicy;
+import net.rasanovum.runeweaver.enums.Lifetime;
+import net.rasanovum.runeweaver.util.Index;
+import net.rasanovum.runeweaver.util.functions.Event;
 import net.rasanovum.timberframes.TimberFrameAssets;
 import net.rasanovum.timberframes.TimberFrames;
 import net.rasanovum.timberframes.util.VersionUtils;
@@ -70,19 +70,19 @@ public final class RecipeGenerator {
         if (registered) return;
         registered = true;
 
-        register(Mixson.DEFAULT_PRIORITY, "timber_frames:collect_log_tags",
+        register(Runeweaver.DEFAULT_PRIORITY, "timber_frames:collect_log_tags",
                 RecipeGenerator::isTagResource, RecipeGenerator::collectTag);
-        register(Mixson.DEFAULT_PRIORITY, "timber_frames:collect_timber_groups",
+        register(Runeweaver.DEFAULT_PRIORITY, "timber_frames:collect_timber_groups",
                 RecipeGenerator::isGroupResource, RecipeGenerator::collectGroup);
-        register(Mixson.DEFAULT_PRIORITY + 1, "timber_frames:finish_collecting_log_tags",
+        register(Runeweaver.DEFAULT_PRIORITY + 1, "timber_frames:finish_collecting_log_tags",
                 RecipeGenerator::isTagResource, context -> tagsReady.complete(null));
-        register(Mixson.DEFAULT_PRIORITY + 2, "timber_frames:generate_recipes",
+        register(Runeweaver.DEFAULT_PRIORITY + 2, "timber_frames:generate_recipes",
                 RecipeGenerator::isGeneratorResource, RecipeGenerator::generateRecipes);
     }
 
     private static void register(int priority, String name, Predicate<Index> filter,
                                  Event<JsonElement> event) {
-        Mixson.registerEvent(priority, Lifetime.PERSISTENT, ErrorPolicy.THROW, name, filter, event);
+        Runeweaver.registerEvent(priority, Lifetime.PERSISTENT, ErrorPolicy.THROW, name, filter, event);
     }
 
     public static List<ResourceLocation> getTimberIds() {
@@ -137,7 +137,7 @@ public final class RecipeGenerator {
         }
     }
 
-    private static void collectTag(net.ramixin.mixson.EventContext<JsonElement> context) {
+    private static void collectTag(net.rasanovum.runeweaver.EventContext<JsonElement> context) {
         resetForNextReloadIfNeeded();
 
         String path = context.getIndex().id().getPath();
@@ -164,7 +164,7 @@ public final class RecipeGenerator {
         }
     }
 
-    private static void collectGroup(net.ramixin.mixson.EventContext<JsonElement> context) {
+    private static void collectGroup(net.rasanovum.runeweaver.EventContext<JsonElement> context) {
         resetForNextReloadIfNeeded();
 
         String path = context.getIndex().id().getPath();
@@ -271,7 +271,7 @@ public final class RecipeGenerator {
         return index.idEquals(GENERATOR_RESOURCE);
     }
 
-    private static void generateRecipes(net.ramixin.mixson.EventContext<JsonElement> context) {
+    private static void generateRecipes(net.rasanovum.runeweaver.EventContext<JsonElement> context) {
         awaitTags();
 
         List<Variant> variants = new ArrayList<>();

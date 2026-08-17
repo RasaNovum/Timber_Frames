@@ -39,9 +39,8 @@ neoForge {
 
 repositories {
     mavenLocal()
-    maven("https://raw.githubusercontent.com/Rasa-Novum/Mixson/maven/")
+    maven("https://raw.githubusercontent.com/Rasa-Novum/runeweaver/maven/")
     maven("https://raw.githubusercontent.com/Rasa-Novum/Rosetta_Library/maven/")
-    maven("https://raw.githubusercontent.com/xameryn/Mixson/maven/")
     maven("https://maven.su5ed.dev/releases")
     maven("https://repo.sleeping.town/")
     maven("https://maven.terraformersmc.com/")
@@ -56,19 +55,19 @@ repositories {
 }
 
 dependencies {
-    val mixsonDependency = "com.rasanovum.mixson:mixson-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
-    val mixsonRosettaDependency = "com.rasanovum.mixson:mixson-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
+    val runeweaverDependency = "com.rasanovum.runeweaver:runeweaver-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.runeweaver")}"
+    val runeweaverRosettaDependency = "com.rasanovum.runeweaver:runeweaver-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.runeweaver")}"
     val rosettaDependency = "com.rasanovum.rosetta:rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.rosetta")}"
 
     implementation(rosettaDependency)
-    compileOnly(mixsonDependency)
-    runtimeOnly(mixsonDependency)
-    implementation(mixsonRosettaDependency)
-    jarJar(mixsonDependency) {
-        version { strictly("[${property("deps.mixson")}]" ) }
+    compileOnly(runeweaverDependency)
+    runtimeOnly(runeweaverDependency)
+    implementation(runeweaverRosettaDependency)
+    jarJar(runeweaverDependency) {
+        version { strictly("[${property("deps.runeweaver")}]" ) }
     }
-    jarJar(mixsonRosettaDependency) {
-        version { strictly("[${property("deps.mixson")}]" ) }
+    jarJar(runeweaverRosettaDependency) {
+        version { strictly("[${property("deps.runeweaver")}]" ) }
     }
     jarJar(rosettaDependency) {
         version { strictly("[${property("deps.rosetta")}]" ) }
@@ -93,7 +92,7 @@ tasks.named<ProcessResources>("processResources") {
         "sources" to project.property("mod.sources"),
         "neoforge" to project.property("deps.neoforge_version"),
         "rosetta" to project.property("deps.rosetta"),
-        "mixson" to project.property("deps.mixson"),
+        "runeweaver" to project.property("deps.runeweaver"),
     )
 
     inputs.properties(props)

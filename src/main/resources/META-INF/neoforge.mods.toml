@@ -38,15 +38,15 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${modId}]]
-modId = "mixson"
+modId = "runeweaver"
 type = "required"
-versionRange = "[${mixson},)"
+versionRange = "[${runeweaver},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${modId}]]
-modId = "mixson_rosetta"
+modId = "runeweaver_rosetta"
 type = "required"
-versionRange = "[${mixson},)"
+versionRange = "[${runeweaver},)"
 ordering = "NONE"
 side = "BOTH"

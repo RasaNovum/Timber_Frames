@@ -11,8 +11,8 @@ import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 import java.util.jar.Manifest
 
-// TODO: Update loom to match Mixson
-abstract class MixsonLoomCompatibilityTransform : TransformAction<TransformParameters.None> {
+// TODO: Update loom to match Runeweaver
+abstract class RuneweaverLoomCompatibilityTransform : TransformAction<TransformParameters.None> {
     @get:org.gradle.api.artifacts.transform.InputArtifact
     abstract val inputArtifact: Provider<FileSystemLocation>
 
@@ -62,8 +62,7 @@ loom {
 
 repositories {
     mavenLocal()
-    maven("https://raw.githubusercontent.com/xameryn/Mixson/maven/")
-    maven("https://raw.githubusercontent.com/Rasa-Novum/Mixson/maven/")
+    maven("https://raw.githubusercontent.com/Rasa-Novum/runeweaver/maven/")
     maven("https://raw.githubusercontent.com/Rasa-Novum/Rosetta_Library/maven/")
     maven("https://repo.sleeping.town/")
     maven("https://maven.terraformersmc.com/")
@@ -76,28 +75,28 @@ repositories {
     mavenCentral()
 }
 
-val mixsonDependency = "com.rasanovum.mixson:mixson-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
-val mixsonRosettaDependency = "com.rasanovum.mixson:mixson-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.mixson")}"
-val mixsonCompatible = configurations.create("mixsonCompatible") {
+val runeweaverDependency = "com.rasanovum.runeweaver:runeweaver-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.runeweaver")}"
+val runeweaverRosettaDependency = "com.rasanovum.runeweaver:runeweaver-rosetta-${property("deps.minecraft")}-${property("deps.loader")}:${property("deps.runeweaver")}"
+val runeweaverCompatible = configurations.create("runeweaverCompatible") {
     isCanBeResolved = true
     isCanBeConsumed = false
     attributes {
         attribute(
             ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE,
-            "mixson-loom-compatible"
+            "runeweaver-loom-compatible"
         )
     }
 }
 
 dependencies {
-    registerTransform(MixsonLoomCompatibilityTransform::class) {
+    registerTransform(RuneweaverLoomCompatibilityTransform::class) {
         from.attribute(
             ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE,
             ArtifactTypeDefinition.JAR_TYPE
         )
         to.attribute(
             ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE,
-            "mixson-loom-compatible"
+            "runeweaver-loom-compatible"
         )
     }
 
@@ -110,11 +109,11 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     modImplementation(rosettaDependency)
-    add(mixsonCompatible.name, mixsonDependency)
-    add(mixsonCompatible.name, mixsonRosettaDependency)
+    add(runeweaverCompatible.name, runeweaverDependency)
+    add(runeweaverCompatible.name, runeweaverRosettaDependency)
     include(rosettaDependency)
-    include(mixsonDependency)
-    include(mixsonRosettaDependency)
+    include(runeweaverDependency)
+    include(runeweaverRosettaDependency)
     modImplementation("maven.modrinth:sodium:${property("deps.sodium")}")
     modImplementation("maven.modrinth:iris:${property("deps.iris")}")
     if (property("deps.minecraft") == "1.20.1") {
@@ -130,8 +129,8 @@ dependencies {
 }
 
 dependencies {
-    modCompileOnly(files(mixsonCompatible))
-    modRuntimeOnly(files(mixsonCompatible))
+    modCompileOnly(files(runeweaverCompatible))
+    modRuntimeOnly(files(runeweaverCompatible))
 }
 
 if (property("deps.minecraft") == "1.20.1") {
@@ -169,7 +168,7 @@ tasks.named<ProcessResources>("processResources") {
         "fapi" to project.property("deps.fabric_api"),
 
         "rosetta" to project.property("deps.rosetta"),
-        "mixson" to project.property("deps.mixson"),
+        "runeweaver" to project.property("deps.runeweaver"),
     )
 
     inputs.properties(props)
