@@ -16,7 +16,7 @@
 		"sources": "${sources}"
 	},
 	"license": "${license}",
-	"icon": "assets/${modId}/icon.png",
+	"icon": "logo.png",
 	"accessWidener": "${modId}.accesswidener",
 	"environment": "*",
 	"entrypoints": {
