@@ -87,7 +87,9 @@ public final class TimberFramesClientEntrypoint implements RosettaClientEntrypoi
                 //?}
                 if (blockId != null) {
                     TextureAtlasSprite sprite = model.getParticleIcon();
-                    TimberFrameBakedModel.registerBlockSprite(blockId, sprite);
+                    if (sprite != null) {
+                        TimberFrameBakedModel.registerBlockSprite(blockId, sprite);
+                    }
                 }
 
                 if (id != null && id.getNamespace().equals(TimberFrames.MODID) && id.getPath().contains("timber_frame")) {

@@ -2,7 +2,8 @@
   "target": {
     "any": [
       { "block_tag": "forge:stripped_logs" },
-      { "block_tag": "c:stripped_logs" }
+      { "block_tag": "c:stripped_logs" },
+      { "block_tag": "minecraft:logs" }
     ]
   },
   "inputs": {
@@ -24,7 +25,8 @@
       "stripped_*_wood",
       "stripped_*_stem",
       "stripped_*_hyphae",
-      "stripped_*_block"
+      "stripped_*_block",
+      "*_stripped_log"
     ],
     "inputs": [
       "stripped_*_log",
