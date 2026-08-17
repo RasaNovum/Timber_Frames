@@ -38,22 +38,23 @@
 
 - We're a small group of friends making mods for our modpack and eventual server.
 
+<!-- Issues Link -->
+<p style="text-align: center;">If you have any bug reports, please leave them on our <a href="https://github.com/Rasa-Novum/Timber_Frames/issues" rel="nofollow" target="_blank">GitHub Issue Tracker</a>.</p>
+
 <p align="center"><img src="https://i.imgur.com/QSjVtfa.png" alt="Divider" width="1200" /></p>
 
-<!-- Issues Link -->
-<p align="center">If you have any bug reports, please leave them on our <a href="https://github.com/Rasa-Novum/Timber_Frames/issues" rel="nofollow" target="_blank">GitHub Issue Tracker</a>.</p>
-
 <!-- Socials Section -->
-<p align="center"><img src="https://i.imgur.com/V9V48Tt.png" alt="Social Links" width="1200" /></p>
+<p align="center"><img src="https://i.imgur.com/V9V48Tt.png" alt="Social Links" /></p>
 
-<p align="center">
-  <a href="https://www.rasanovum.ca/" rel="nofollow" target="_blank"><img src="https://i.imgur.com/dWKubWd.png" alt="Rasa Novum Website" height="110" style="margin: 0 20px;" /></a>
-  <a href="https://discord.gg/WGh4mq6W5U" rel="nofollow" target="_blank"><img src="https://i.imgur.com/iGKNGA3.png" alt="Discord" height="110" style="margin: 0 20px;" /></a>
-  <a href="https://github.com/Rasa-Novum" rel="nofollow" target="_blank"><img src="https://i.imgur.com/0gYQeJT.png" alt="GitHub" height="110" style="margin: 0 20px;" /></a>
-  <a href="https://twitter.com/Rasa_Novum" rel="nofollow" target="_blank"><img src="https://i.imgur.com/5h47qoo.png" alt="Twitter/X" height="110" style="margin: 0 20px;" /></a>
+<p style="text-align: center;">
+  <a href="https://www.rasanovum.ca/" rel="nofollow" target="_blank"><img src="https://i.imgur.com/35yfbqc.png" alt="Rasa Novum Website"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://discord.gg/WGh4mq6W5U" rel="nofollow" target="_blank"><img src="https://i.imgur.com/Syix4CM.png" alt="Discord"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/Rasa-Novum" rel="nofollow" target="_blank"><img src="https://i.imgur.com/mkjx2XG.png" alt="GitHub"></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://twitter.com/Rasa_Novum" rel="nofollow" target="_blank"><img src="https://i.imgur.com/hB5qyO1.png" alt="Twitter/X"></a>
 </p>
-
-<p align="center">If you're a fan of tightly designed mods like Timber Frames, try checking out our other mods for building and infrastructure like Ender Sender and Via Romana!</p>
 
 <!-- Credits Section -->
 <h2 align="center">Credits</h2>
