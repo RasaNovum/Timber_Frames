@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.rasanovum.timberframes.block.entity.TimberFrameBlockEntity;
 import net.rasanovum.timberframes.items.TimberFrameItem;
@@ -205,6 +207,14 @@ public final class ForgeTimberFrameBakedModel implements BakedModel {
     }
 
     private static TextureAtlasSprite sprite(ResourceLocation textureId) {
+        if (BuiltInRegistries.BLOCK.containsKey(textureId)) {
+            Block block = BuiltInRegistries.BLOCK.get(textureId);
+            TextureAtlasSprite particle = Minecraft.getInstance().getBlockRenderer()
+                    .getBlockModel(block.defaultBlockState())
+                    .getParticleIcon();
+            if (!isMissing(particle)) return particle;
+        }
+
         ResourceLocation resolved = textureId.getPath().startsWith("block/")
                 ? textureId
                 : VersionUtils.getLocation(textureId.getNamespace(), "block/" + textureId.getPath());
